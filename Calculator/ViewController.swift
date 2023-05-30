@@ -7,47 +7,40 @@
 
 import UIKit
 
-class ViewController: UIViewController
-{
+class ViewController: UIViewController {
+    
     @IBOutlet weak var calcWorkings: UILabel!
     @IBOutlet weak var calcResults: UILabel!
     var isFirstBracket = true
     var isFirstCalculations = false
     var workings = ""
     
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    func addToWorkings(value:String)
-    {
+    func addToWorkings(value:String) {
         workings = workings + value
         calcWorkings.text = workings
     }
     
-    func formatResult(result:Double) -> String
-    {
-        if(result.truncatingRemainder(dividingBy: 1) == 0)
-        {
+    func formatResult(result:Double) -> String {
+        if(result.truncatingRemainder(dividingBy: 1) == 0) {
             return String(format: "%.0f", result)
         }
         
-        else
-        {
+        else {
             return String(format: "%.2f", result)
         }
     }
     
-    func validInput() -> Bool
-    {
+    func validInput() -> Bool {
         var count = 0
         var funcCharIndexes = [Int]()
         
-        for char in workings
-        {
-            if(specialCharacter(char: char))
-            {
+        for char in workings {
+            
+            if(specialCharacter(char: char)) {
                 funcCharIndexes.append(count)
             }
             count += 1
@@ -55,22 +48,17 @@ class ViewController: UIViewController
         
         var previous: Int = -1
         
-        for index in funcCharIndexes
-        {
-            if(index == 0)
-            {
+        for index in funcCharIndexes {
+            if(index == 0) {
                 return false
             }
             
-            if(index == workings.count - 1)
-            {
+            if(index == workings.count - 1) {
                 return false
             }
             
-            if(previous != -1)
-            {
-                if(index - previous == 1)
-                {
+            if(previous != -1) {
+                if(index - previous == 1) {
                     return false
                 }
             }
@@ -80,36 +68,29 @@ class ViewController: UIViewController
         return true
     }
     
-    func specialCharacter(char : Character) -> Bool
-    {
-        if(char == "*")
-        {
+    func specialCharacter(char : Character) -> Bool {
+        if(char == "*") {
             return true
         }
         
-        if(char == "/")
-        {
+        if(char == "/") {
             return true
         }
         
-        if(char == "+")
-        {
+        if(char == "+") {
             return true
         }
         
-        if(char == "-")
-        {
+        if(char == "-") {
             return true
         }
         
         return false
     }
     
-    func calculate()
-    {
-        if(validInput())
-        {
-            if(isFirstCalculations){
+    func calculate() {
+        if(validInput()) {
+            if(isFirstCalculations) {
                 calcWorkings.text = ""
                 calcResults.text = ""
             }
@@ -122,22 +103,17 @@ class ViewController: UIViewController
         }
     }
     
-    @IBAction func clearClicked(_ sender: Any)
-    {
+    @IBAction func clearClicked(_ sender: Any) {
         workings = ""
         calcWorkings.text = ""
         calcResults.text = ""
     }
     
-    @IBAction func paranthesisClicked(_ sender: Any)
-    {
-        if(isFirstBracket)
-        {
+    @IBAction func paranthesisClicked(_ sender: Any) {
+        if(isFirstBracket) {
             addToWorkings(value: "(")
             isFirstBracket = false
-        }
-        else
-        {
+        } else {
             addToWorkings(value: ")")
             isFirstBracket = true
         }
@@ -147,30 +123,24 @@ class ViewController: UIViewController
         addToWorkings(value: "%")
     }
     
-    @IBAction func divideClicked(_ sender: Any)
-    {
+    @IBAction func divideClicked(_ sender: Any) {
         addToWorkings(value: "/")
     }
     
-    @IBAction func multiplyClicked(_ sender: Any)
-    {
+    @IBAction func multiplyClicked(_ sender: Any) {
         addToWorkings(value: "*")
     }
     
-    @IBAction func minusClicked(_ sender: Any)
-    {
+    @IBAction func minusClicked(_ sender: Any) {
         addToWorkings(value: "-")
     }
     
-    @IBAction func addClicked(_ sender: Any)
-    {
+    @IBAction func addClicked(_ sender: Any) {
         addToWorkings(value: "+")
     }
     
-    @IBAction func equalClicked(_ sender: Any)
-    {
-        if validInput()
-        {
+    @IBAction func equalClicked(_ sender: Any) {
+        if validInput() {
             calculate()
             isFirstBracket = true
             workings = ""
@@ -178,76 +148,63 @@ class ViewController: UIViewController
         }
     }
     
-    @IBAction func deleteClicked(_ sender: Any)
-    {
-        if(!workings.isEmpty)
-        {
+    @IBAction func deleteClicked(_ sender: Any) {
+        if(!workings.isEmpty) {
             workings.removeLast()
             calcWorkings.text = workings
         }
     }
     
-    @IBAction func dotClicked(_ sender: Any)
-    {
+    @IBAction func dotClicked(_ sender: Any) {
         addToWorkings(value: ".")
     }
     
-    @IBAction func zeroClicked(_ sender: Any)
-    {
+    @IBAction func zeroClicked(_ sender: Any) {
         addToWorkings(value: "0")
         //calculate()
     }
     
-    @IBAction func oneClicked(_ sender: Any)
-    {
+    @IBAction func oneClicked(_ sender: Any) {
         addToWorkings(value: "1")
         //calculate()
     }
     
-    @IBAction func twoClicked(_ sender: Any)
-    {
+    @IBAction func twoClicked(_ sender: Any) {
         addToWorkings(value: "2")
         //calculate()
     }
     
-    @IBAction func threeClicked(_ sender: Any)
-    {
+    @IBAction func threeClicked(_ sender: Any) {
         addToWorkings(value: "3")
         //calculate()
     }
     
-    @IBAction func fourClicked(_ sender: Any)
-    {
+    @IBAction func fourClicked(_ sender: Any) {
         addToWorkings(value: "4")
         //calculate()
     }
     
-    @IBAction func fiveClicked(_ sender: Any)
-    {
+    @IBAction func fiveClicked(_ sender: Any) {
         addToWorkings(value: "5")
         //calculate()
     }
     
-    @IBAction func sixClicked(_ sender: Any)
-    {
+    @IBAction func sixClicked(_ sender: Any) {
         addToWorkings(value: "6")
         //calculate()
     }
     
-    @IBAction func sevenClicked(_ sender: Any)
-    {
+    @IBAction func sevenClicked(_ sender: Any) {
         addToWorkings(value: "7")
         //calculate()
     }
     
-    @IBAction func eightClicked(_ sender: Any)
-    {
+    @IBAction func eightClicked(_ sender: Any) {
         addToWorkings(value: "8")
         //calculate()
     }
     
-    @IBAction func nineClicked(_ sender: Any)
-    {
+    @IBAction func nineClicked(_ sender: Any) {
         addToWorkings(value: "9")
         //calculate()
     }
